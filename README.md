@@ -271,6 +271,28 @@ echo "PRISMA_API_SECRET=${PRISMA_API_SECRET}" >> ./prisma/secrets/prod.env
 
 ## PRISMA_CONFIG secret
 ### Describe 'prisma-config-secret.yaml' in './prisma/secrets' folder
+apiVersion: v1 \
+kind: Secret \
+metadata: \
+  name: "prisma-config-secret" \
+  namespace: prisma \
+type: Opaque \
+stringData: \
+  PRISMA_CONFIG: |- \
+    port: 4466 \
+    managementApiSecret: [PRISMA_MANAGEMENT_API_SECRET] \
+    enableManagementApi: true \
+    databases: \
+      default: \
+        connector: postgres \
+        host: localhost \
+        database: [DATABASE_NAME] \
+        user: [DB_PRISMA_USER_NAME] \
+        ssl: false \
+        password: [DB_PRISMA_USER_PASSWORD] \
+        rawAccess: true \
+        port: '5432' \
+        migrations: true \
 
 ### Apply 'prisma-config-secret.yaml'
 kubectl apply -f ./prisma/secrets/prisma-config-secret.yaml
