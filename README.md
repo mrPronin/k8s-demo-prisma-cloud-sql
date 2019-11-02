@@ -182,7 +182,7 @@ DB_INSTANCE_CONNECTION_NAME="$(gcloud sql instances describe ${DB_INSTANCE_ID} \
 --format='get(connectionName)')"
 
 ### Store instance connection name to prod.env
-echo "DB_PRISMA_USER_NAME=${DB_PRISMA_USER_NAME}" >> ./prisma/secrets/prod.env
+echo "DB_INSTANCE_CONNECTION_NAME=${DB_INSTANCE_CONNECTION_NAME}" >> ./prisma/secrets/prod.env
 
 ## Default ('postgres') user
 ### Generate default user password
